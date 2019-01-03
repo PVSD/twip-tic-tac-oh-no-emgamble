@@ -1,89 +1,117 @@
 package com.company;
 
 import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        String [] [] board = new String[3][3];
-        Scanner playerX = new Scanner(System.in);
-        Scanner playerO = new Scanner(System.in);
-
-        while(true) {
-            System.out.println("Player X please input your first move as a coordinate (x y), remember the board starts at 0.");
-            int x = playerX.nextInt();
-            int y = playerX.nextInt();
-            if(!board[x][y].equals("X")||!board[x][y].equals("O")) {
-                board[x][y] = "X";
-            }
-            else
-                System.out.println("Sorry that slot is already full");
-            System.out.println(" " + board[0][0] + " | " + board[0][1] + " | " + board[0][2] + " ");
-            System.out.println("-----------------------------------------------------------------");
-            System.out.println(" " + board[1][0] + " | " + board[1][1] + " | " + board[1][2] + " ");
-            System.out.println("-----------------------------------------------------------------");
-            System.out.println(" " + board[2][0] + " | " + board[2][1] + " | " + board[2][2] + " ");
-            System.out.println("-----------------------------------------------------------------");
+        Scanner Option = new Scanner(System.in);
+        System.out.println("Choose an option from the list below and enter the letter of your option: \n a. Player vs Player" +
+                " \n b. Player vs Computer \n c. Computer vs Computer");
+        String choice = Option.nextLine();
 
 
+        if (choice.equals("a")) {
 
-            System.out.println("Player O please input your first move as a coordinate (x y), remember the board starts at 0.");
-            int a = playerO.nextInt();
-            int b = playerX.nextInt();
-            if(!board[a][b].equals("X")||!board[x][y].equals("O")) {
-                board[a][b] = "O";
-            }
-            else
-                System.out.println("Sorry that slot is already full");
-            System.out.println(" " + board[0][0] + " | " + board[0][1] + " | " + board[0][2] + " ");
-            System.out.println("-----------------------------------------------------------------");
-            System.out.println(" " + board[1][0] + " | " + board[1][1] + " | " + board[1][2] + " ");
-            System.out.println("-----------------------------------------------------------------");
-            System.out.println(" " + board[2][0] + " | " + board[2][1] + " | " + board[2][2] + " ");
-            System.out.println("-----------------------------------------------------------------");
+            Scanner playerXx = new Scanner(System.in);
+            Scanner playerXy = new Scanner(System.in);
+            Scanner playerOx = new Scanner(System.in);
+            Scanner playerOy = new Scanner(System.in);
+            XO game = new XO();
+            game.buildBoard();
 
-            int testWinner = 8;
-            String line = null;
-            switch (testWinner) {
-                    case 1:
-                        line = board[0][0] + board[0][1] + board[0][2];
-                        break;
-                    case 2:
-                        line = board[1][0] + board[1][1] + board[1][2];
-                        break;
-                    case 3:
-                        line = board[2][0] + board[2][1] + board[2][2];
-                        break;
-                    case 4:
-                        line = board[0][1] + board[1][1] + board[2][1];
-                        break;
-                    case 5:
-                        line = board[0][2] + board[1][2] + board[2][2];
-                        break;
-                    case 6:
-                        line = board[0][0] + board[1][0] + board[2][0];
-                        break;
-                    case 7:
-                        line = board[0][0] + board[1][1] + board[2][2];
-                        break;
-                    case 8:
-                        line = board[2][0] + board[1][1] + board[0][2];
-                        break;
+
+            while (game.Winner() == null) {
+                System.out.println("Player X please input the x coordinate of your move");
+                int x = playerXx.nextInt();
+                System.out.println("Player X please input the y coordinate of your move");
+                int y = playerXy.nextInt();
+                game.Xmove(x, y);
+                System.out.println(game.makeBoard());
+
+                System.out.println("Player O please input the x coordinate of your move");
+                int a = playerOx.nextInt();
+                System.out.println("Player X please input the y coordinate of your move");
+                int b = playerOy.nextInt();
+                game.Omove(a, b);
+                System.out.println(game.makeBoard());
+
+
+                if (game.CheckCompletion() == true) {
+                    System.out.println("Its a draw!");
+                    break;
                 }
-            if(line.equals("XXX")) {
-                System.out.println("Player X is the winner");
-                break;
+
+
             }
-            else if(line.equals("OOO")) {
-                System.out.println("Player O is the winner");
-                break;
+            System.out.println(game.Winner());
+
+
+        }
+        else if (choice.equals("b")){
+            Scanner playerXx = new Scanner(System.in);
+            Scanner playerXy = new Scanner(System.in);
+            XO game = new XO();
+            game.buildBoard();
+
+
+
+            while (game.Winner() == null) {
+                System.out.println("Player X please input the x coordinate of your move");
+                int x = playerXx.nextInt();
+                System.out.println("Player X please input the y coordinate of your move");
+                int y = playerXy.nextInt();
+                game.Xmove(x, y);
+                System.out.println(game.makeBoard());
+
+                game.ComputerMove();
+                System.out.println(game.makeBoard());
+
+
+                if (game.CheckCompletion() == true) {
+                    System.out.println("Its a draw!");
+                    break;
+                }
+
+
             }
+            System.out.println(game.Winner());
+
+        }
+        else if (choice.equals("c")){
+
+            XO game = new XO();
+            game.buildBoard();
+            Random randx = new Random();
+            int x = randx.nextInt(3);
+            Random randy = new Random();
+            int y = randx.nextInt(3);
+            game.FirstComputerMoveX(x,y);
+
+
+            while (game.Winner() == null) {
+
+
+                game.ComputerMove();
+                System.out.println(game.makeBoard());
+
+                game.ComputerMoveX();
+                System.out.println(game.makeBoard());
+
+
+
+                if (game.CheckCompletion() == true) {
+                    System.out.println("Its a draw!");
+                    break;
+                }
+
+
+            }
+            System.out.println(game.Winner());
 
         }
 
-
-
-
     }
+
 }
