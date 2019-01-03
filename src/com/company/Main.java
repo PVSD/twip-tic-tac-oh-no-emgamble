@@ -7,12 +7,12 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner Option = new Scanner(System.in);
-        System.out.println("Choose an option from the list below and enter the letter of your option: \n a. Player vs Player" +
-                " \n b. Player vs Computer \n c. Computer vs Computer");
+        System.out.println("Choose an option from the list below and enter the letter of your option: \n A. Player vs Player" +
+                " \n B. Player vs Computer \n C. Computer vs Computer");
         String choice = Option.nextLine();
 
 
-        if (choice.equals("a")) {
+        if (choice.equals("A")) {
 
             Scanner playerXx = new Scanner(System.in);
             Scanner playerXy = new Scanner(System.in);
@@ -49,7 +49,7 @@ public class Main {
 
 
         }
-        else if (choice.equals("b")){
+        else if (choice.equals("B")){
             Scanner playerXx = new Scanner(System.in);
             Scanner playerXy = new Scanner(System.in);
             XO game = new XO();
@@ -79,7 +79,7 @@ public class Main {
             System.out.println(game.Winner());
 
         }
-        else if (choice.equals("c")){
+        else if (choice.equals("C")){
 
             XO game = new XO();
             game.buildBoard();
