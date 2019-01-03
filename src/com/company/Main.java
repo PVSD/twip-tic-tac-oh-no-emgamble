@@ -27,7 +27,7 @@ public class Main {
                 game.buildBoard();
 
 
-                while (game.XWinner() == false || game.OWinner() == false) {
+                while (game.XWinner() == true && game.OWinner() == true) {
                     System.out.println("Player X please input the x coordinate of your move");
                     int x = playerXx.nextInt();
                     System.out.println("Player X please input the y coordinate of your move");
@@ -43,6 +43,10 @@ public class Main {
 
 
                     System.out.println(game.makeBoard());
+                    if(game.XWinner()== false)
+                        break;
+                    else if(game.OWinner()== false)
+                        break;
 
                     System.out.println("Player O please input the x coordinate of your move");
                     int a = playerOx.nextInt();
@@ -57,6 +61,10 @@ public class Main {
                         boolean f = game.Xmove(x1O, y2O);
                     }
                     System.out.println(game.makeBoard());
+                    if(game.XWinner()== false)
+                        break;
+                    else if(game.OWinner()==false)
+                        break;
 
 
                     if (game.CheckCompletion() == true) {
@@ -67,9 +75,9 @@ public class Main {
 
                 }
                 if (game.OWinner() == true) {
-                    System.out.println("Player O is the Winner");
-                } else if (game.XWinner() == true) {
                     System.out.println("Player X is the Winner");
+                } else if (game.XWinner() == true) {
+                    System.out.println("Player O is the Winner");
                 }
 
 
@@ -82,16 +90,24 @@ public class Main {
                 game.buildBoard();
 
 
-                while (game.XWinner() == false || game.OWinner() == false) {
+                while (game.XWinner() == true && game.OWinner() == true) {
                     System.out.println("Player X please input the x coordinate of your move");
                     int x = playerXx.nextInt();
                     System.out.println("Player X please input the y coordinate of your move");
                     int y = playerXy.nextInt();
                     game.Xmove(x, y);
                     System.out.println(game.makeBoard());
+                    if(game.XWinner()== false)
+                        break;
+                    else if(game.OWinner()== false)
+                        break;
 
                     game.ComputerMove();
                     System.out.println(game.makeBoard());
+                    if(game.XWinner()== false)
+                        break;
+                    else if(game.OWinner()== false)
+                        break;
 
 
                     if (game.CheckCompletion() == false) {
@@ -102,9 +118,9 @@ public class Main {
 
                 }
                 if (game.OWinner() == true) {
-                    System.out.println("Player O is the Winner");
-                } else if (game.XWinner() == true) {
                     System.out.println("Player X is the Winner");
+                } else if (game.XWinner() == true) {
+                    System.out.println("Player O is the Winner");
                 }
 
                 break;
@@ -120,7 +136,7 @@ public class Main {
                 game.FirstComputerMoveX(x, y);
 
 
-                while (game.XWinner() == false || game.OWinner() == false) {
+                while (game.XWinner() == true && game.OWinner() == true) {
 
 
                     game.ComputerMove();
